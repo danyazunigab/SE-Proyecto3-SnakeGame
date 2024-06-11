@@ -7,23 +7,37 @@ Snake::Snake() : dirX(20), dirY(0) {
 
 Snake::~Snake() {}
 
-void Snake::handleInput(SDL_Event& event) {
-    if (event.type == SDL_KEYDOWN) {
-        switch (event.key.keysym.sym) {
-        case SDLK_UP:
+void Snake::handleInput(SDL_Event& event, char mov) {
+    switch (mov) {
+        case 'w':
             if (dirY == 0) { dirX = 0; dirY = -20; }
             break;
-        case SDLK_DOWN:
+        case 's':
             if (dirY == 0) { dirX = 0; dirY = 20; }
             break;
-        case SDLK_LEFT:
+        case 'a':
             if (dirX == 0) { dirX = -20; dirY = 0; }
             break;
-        case SDLK_RIGHT:
+        case 'd':
             if (dirX == 0) { dirX = 20; dirY = 0; }
             break;
         }
-    }
+    /*if (event.type == SDL_KEYDOWN) {
+        switch (mov) {
+        case 'w':
+            if (dirY == 0) { dirX = 0; dirY = -20; }
+            break;
+        case 's':
+            if (dirY == 0) { dirX = 0; dirY = 20; }
+            break;
+        case 'a':
+            if (dirX == 0) { dirX = -20; dirY = 0; }
+            break;
+        case 'd':
+            if (dirX == 0) { dirX = 20; dirY = 0; }
+            break;
+        }
+    }*/
 }
 
 void Snake::update() {

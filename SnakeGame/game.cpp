@@ -28,7 +28,7 @@ void Game::init(const char* title, int width, int height) {
     spawnFruit(); // Generar la primera fruta al inicializar el juego
 }
 
-void Game::handleEvents() {
+void Game::handleEvents(char mov) {
     SDL_Event event;
     SDL_PollEvent(&event);
 
@@ -37,7 +37,7 @@ void Game::handleEvents() {
         isRunning = false;
         break;
     default:
-        snake->handleInput(event);
+        snake->handleInput(event,mov);
         break;
     }
 }

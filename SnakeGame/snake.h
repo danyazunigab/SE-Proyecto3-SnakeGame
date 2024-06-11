@@ -9,7 +9,7 @@ public:
     Snake();
     ~Snake();
 
-    void handleInput(SDL_Event& event);
+    void handleInput(SDL_Event& event, char mov);
     void update();
     void render(SDL_Renderer* renderer);
     void grow();
