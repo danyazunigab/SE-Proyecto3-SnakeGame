@@ -58,10 +58,8 @@ int main(int argc, char* argv[]) {
     const std::chrono::milliseconds frame_duration(80);
 
     while (game.running()) {
-        valread = read(new_socket, buffer, 1024);
-        //moveSnake(buffer[0]);
+        read(new_socket, buffer, 1024);
         auto frame_start = std::chrono::steady_clock::now();
-        moveSnake(buffer[0]);
         game.handleEvents(buffer[0]);
         game.update();
         game.render();
