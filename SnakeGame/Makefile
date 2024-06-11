@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -fopenmp
-SDL2_FLAGS = `sdl2-config --cflags --libs`
+SDL2_FLAGS = $(shell sdl2-config --cflags --libs)
 SOURCES = main.cpp game.cpp snake.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = snake_game

@@ -1,4 +1,5 @@
 #include "snake.h"
+#include <omp.h>
 
 Snake::Snake() : dirX(20), dirY(0) {
     SDL_Rect head = { 100, 100, 20, 20 };
@@ -41,6 +42,7 @@ void Snake::handleInput(SDL_Event& event, char mov) {
 }
 
 void Snake::update() {
+    #pragma omp parallel for
     for (int i = body.size() - 1; i > 0; --i) {
         body[i] = body[i - 1];
     }
@@ -53,6 +55,7 @@ void Snake::update() {
     if (body[0].y < 0) body[0].y = 580;
     if (body[0].y >= 600) body[0].y = 0;
 }
+
 
 void Snake::render(SDL_Renderer* renderer) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
