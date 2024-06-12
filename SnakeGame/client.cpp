@@ -7,7 +7,7 @@
 #include <termios.h> // Incluir la cabecera para capturar la entrada del teclado
 
 #define PORT 65432
-#define SERVER_IP "127.0.0.1"
+#define SERVER_IP "192.168.100.8"
 
 int main() {
     int sock = 0, valread;

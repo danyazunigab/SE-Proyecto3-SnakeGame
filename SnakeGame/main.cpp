@@ -3,9 +3,9 @@
 #include <thread>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "game.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include "game.h"
 
 #define PORT 65432
 
@@ -58,10 +58,10 @@ int main(int argc, char* argv[]) {
     Game game;
     game.init("Snake Game", 800, 600);
 
-    const std::chrono::milliseconds frame_duration(80);
+    const std::chrono::milliseconds frame_duration(100);
 
     while (game.running()) {
-         valread = read(new_socket, buffer, 1024);
+        valread = read(new_socket, buffer, 1024);
         if (valread > 0) {
             game.handleEvents(buffer[0]);
         }

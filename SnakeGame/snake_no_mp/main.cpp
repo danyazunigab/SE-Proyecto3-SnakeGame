@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
     Game game;
     game.init("Snake Game", 800, 600);
 
-    const std::chrono::milliseconds frame_duration(80);
+    const std::chrono::milliseconds frame_duration(100);
 
     while (game.running()) {
          valread = read(new_socket, buffer, 1024);
