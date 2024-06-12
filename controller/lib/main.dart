@@ -25,16 +25,45 @@ class SnakeController extends StatefulWidget {
 
 class _SnakeControllerState extends State<SnakeController> {
   late Socket socket;
+  late TextEditingController ipController;
 
   @override
   void initState() {
     super.initState();
-    connectToServer();
+    ipController = TextEditingController();
+    _showIpInputDialog();
   }
 
-  void connectToServer() async {
+  void _showIpInputDialog() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Enter Server IP"),
+            content: TextField(
+              controller: ipController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              decoration: InputDecoration(hintText: "Enter IP Address"),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Connect'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _connectToServer(ipController.text);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
+  void _connectToServer(String ipAddress) async {
     try {
-      socket = await Socket.connect('192.168.134.128', 65432); //CONFIGURAR IP PORQUE ESTA FUE DE PRUEBA XD
+      socket = await Socket.connect(ipAddress, 65432);
       print('Connected to server');
       socket.listen((List<int> event) {
         print('Received: ${String.fromCharCodes(event)}');
