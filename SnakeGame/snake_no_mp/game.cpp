@@ -1,7 +1,7 @@
 #include "game.h"
 #include <iostream>
-#include <omp.h>
-#include<chrono>
+#include <chrono>
+
 
 Game::Game() : isRunning(false), window(nullptr), renderer(nullptr), snake(nullptr), gen(rd()), xDist(0, 39), yDist(0, 29) {}
 
@@ -82,7 +82,6 @@ void Game::render() {
 
     // Renderizar las frutas
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Color rojo para las frutas
-    #pragma omp parallel for
     for (int i = 0; i < fruits.size(); ++i) {
         SDL_RenderFillRect(renderer, &fruits[i].rect);
     }
