@@ -1,7 +1,7 @@
 #include "snake.h"
 
-Snake::Snake() : dirX(20), dirY(0) {
-    SDL_Rect head = { 100, 100, 20, 20 };
+Snake::Snake() : dirX(8), dirY(0) {
+    SDL_Rect head = { 64, 32, 8, 8 };
     body.push_back(head);
 }
 
@@ -10,18 +10,18 @@ Snake::~Snake() {}
 void Snake::handleInput(SDL_Event& event, char mov) {
     switch (mov) {
         case 'w':
-            if (dirY == 0) { dirX = 0; dirY = -20; }
+            if (dirY == 0) { dirX = 0; dirY = -8; }
             break;
         case 's':
-            if (dirY == 0) { dirX = 0; dirY = 20; }
+            if (dirY == 0) { dirX = 0; dirY = 8; }
             break;
         case 'a':
-            if (dirX == 0) { dirX = -20; dirY = 0; }
+            if (dirX == 0) { dirX = -8; dirY = 0; }
             break;
         case 'd':
-            if (dirX == 0) { dirX = 20; dirY = 0; }
+            if (dirX == 0) { dirX = 8; dirY = 0; }
             break;
-        }
+    }
 }
 
 void Snake::update() {
@@ -32,10 +32,10 @@ void Snake::update() {
     body[0].y += dirY;
 
     // Wrap the snake around the screen edges
-    if (body[0].x < 0) body[0].x = 780;
-    if (body[0].x >= 800) body[0].x = 0;
-    if (body[0].y < 0) body[0].y = 580;
-    if (body[0].y >= 600) body[0].y = 0;
+    if (body[0].x < 0) body[0].x = 120;
+    if (body[0].x >= 128) body[0].x = 0;
+    if (body[0].y < 0) body[0].y = 56;
+    if (body[0].y >= 64) body[0].y = 0;
 }
 
 

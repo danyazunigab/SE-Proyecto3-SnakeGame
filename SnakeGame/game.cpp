@@ -1,9 +1,8 @@
 #include "game.h"
 #include <iostream>
-#include <omp.h>
-#include<chrono>
+#include <chrono>
 
-Game::Game() : isRunning(false), window(nullptr), renderer(nullptr), snake(nullptr), gen(rd()), xDist(0, 39), yDist(0, 29) {}
+Game::Game() : isRunning(false), window(nullptr), renderer(nullptr), snake(nullptr), gen(rd()), xDist(0, 15), yDist(0, 7) {}
 
 Game::~Game() {
     delete snake;
@@ -39,7 +38,7 @@ void Game::handleEvents(char mov) {
         isRunning = false;
         break;
     default:
-        snake->handleInput(event,mov);
+        snake->handleInput(event, mov);
         break;
     }
 }
@@ -56,7 +55,7 @@ void Game::update() {
     }
 
     // Detectar si la serpiente ha colisionado con los bordes de la pantalla
-    if (snake->getHead().x < 0 || snake->getHead().x >= 800 || snake->getHead().y < 0 || snake->getHead().y >= 600) {
+    if (snake->getHead().x < 0 || snake->getHead().x >= 128 || snake->getHead().y < 0 || snake->getHead().y >= 64) {
         isRunning = false;
         return;
     }
@@ -92,7 +91,7 @@ void Game::render() {
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(current_time - last_time).count();
 
     if (duration >= 1) {
-        std::cout << "FPS: " << frame_count+5 / duration << std::endl;
+        std::cout << "FPS: " << frame_count / duration << std::endl;
         frame_count = 0;
         last_time = current_time;
     }
@@ -107,9 +106,9 @@ void Game::clean() {
 
 void Game::spawnFruit() {
     Fruit newFruit;
-    newFruit.rect.x = xDist(gen) * 20;
-    newFruit.rect.y = yDist(gen) * 20;
-    newFruit.rect.w = 20;
-    newFruit.rect.h = 20;
+    newFruit.rect.x = xDist(gen) * 8;
+    newFruit.rect.y = yDist(gen) * 8;
+    newFruit.rect.w = 8;
+    newFruit.rect.h = 8;
     fruits.push_back(newFruit);
 }

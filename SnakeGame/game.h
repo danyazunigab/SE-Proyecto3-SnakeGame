@@ -1,20 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "SDL2/SDL.h"
-#include "snake.h"
+#include <SDL2/SDL.h>
 #include <vector>
 #include <random>
-
-struct Fruit {
-    SDL_Rect rect;
-};
+#include "snake.h"
 
 class Game {
 public:
     Game();
     ~Game();
-
     void init(const char* title, int width, int height);
     void handleEvents(char mov);
     void update();
@@ -24,16 +19,21 @@ public:
 
 private:
     bool isRunning;
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    Snake *snake;
-    std::vector<Fruit> fruits;
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    Snake* snake;
     std::random_device rd;
     std::mt19937 gen;
-    std::uniform_int_distribution<int> xDist;
-    std::uniform_int_distribution<int> yDist;
+    std::uniform_int_distribution<> xDist;
+    std::uniform_int_distribution<> yDist;
+
+    struct Fruit {
+        SDL_Rect rect;
+    };
+
+    std::vector<Fruit> fruits;
 
     void spawnFruit();
 };
 
-#endif
+#endif // GAME_H

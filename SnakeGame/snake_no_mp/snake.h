@@ -1,8 +1,8 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#include "SDL2/SDL.h"
 #include <vector>
+#include <SDL2/SDL.h>
 
 class Snake {
 public:
@@ -13,6 +13,7 @@ public:
     void update();
     void render(SDL_Renderer* renderer);
     void grow();
+
     SDL_Rect& getHead();
     std::vector<SDL_Rect>& getBody();
 
@@ -21,4 +22,4 @@ private:
     int dirX, dirY;
 };
 
-#endif
+#endif // SNAKE_H

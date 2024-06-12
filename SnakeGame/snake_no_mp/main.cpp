@@ -3,16 +3,11 @@
 #include <thread>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "game.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include "game.h"
 
 #define PORT 65432
-
-void moveSnake(char direction) {
-    // Aquí puedes implementar la lógica para mover la serpiente en el juego
-    std::cout << "Moving snake in direction: " << direction << std::endl;
-}
 
 int main(int argc, char* argv[]) {
     int server_fd, new_socket;
@@ -56,12 +51,13 @@ int main(int argc, char* argv[]) {
     char buffer[1024] = {0};
     int valread;
     Game game;
-    game.init("Snake Game", 800, 600);
+    game.init("Snake Game", 128, 64);
 
-    const std::chrono::milliseconds frame_duration(100);
+    // Aumenta la duración del fotograma para hacer que el juego vaya más lento
+    const std::chrono::milliseconds frame_duration(150); // Aumentado de 80ms a 150ms
 
     while (game.running()) {
-         valread = read(new_socket, buffer, 1024);
+        valread = read(new_socket, buffer, 1024);
         if (valread > 0) {
             game.handleEvents(buffer[0]);
         }
