@@ -66,8 +66,19 @@ int main(int argc, char* argv[]) {
             game.handleEvents(buffer[0]);
         }
         auto frame_start = std::chrono::steady_clock::now();
-        game.update();
-        game.render();
+        // Paralelizar las actualizaciones y renderización usando OpenMP
+        #pragma omp parallel sections
+        {
+            #pragma omp section
+            {
+                game.update();
+            }
+
+            #pragma omp section
+            {
+                game.render();
+            }
+        }
 
         auto frame_end = std::chrono::steady_clock::now();
         auto frame_time = std::chrono::duration_cast<std::chrono::milliseconds>(frame_end - frame_start);

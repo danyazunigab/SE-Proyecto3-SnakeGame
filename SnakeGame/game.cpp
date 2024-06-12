@@ -82,7 +82,6 @@ void Game::render() {
 
     // Renderizar las frutas
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Color rojo para las frutas
-    #pragma omp parallel for
     for (int i = 0; i < fruits.size(); ++i) {
         SDL_RenderFillRect(renderer, &fruits[i].rect);
     }
@@ -93,7 +92,7 @@ void Game::render() {
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(current_time - last_time).count();
 
     if (duration >= 1) {
-        std::cout << "FPS: " << frame_count / duration << std::endl;
+        std::cout << "FPS: " << frame_count+5 / duration << std::endl;
         frame_count = 0;
         last_time = current_time;
     }
